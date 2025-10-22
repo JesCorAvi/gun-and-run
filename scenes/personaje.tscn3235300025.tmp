@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2vqth7v7dss"]
+
+[ext_resource type="Texture2D" uid="uid://ktugjsolqvpq" path="res://assets/Cowboy 4 HiRes/Cowboy4.png" id="1_2kcgv"]
+[ext_resource type="Script" uid="uid://cmuo858cu2r13" path="res://scripts/personaje.gd" id="1_n1ehy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1ehy"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(50, 110, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvalt"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(100, 110, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auoqv"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(150, 110, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrhk4"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(200, 110, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1pmb"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(50, 165, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h8dm"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(250, 110, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdnqt"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(300, 110, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w6sy"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(350, 110, 50, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ink26"]
+atlas = ExtResource("1_2kcgv")
+region = Rect2(0, 165, 50, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rirxc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1ehy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvalt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auoqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrhk4")
+}],
+"loop": true,
+"name": &"defaultNoGun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1pmb")
+}],
+"loop": true,
+"name": &"jumpNoGun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4h8dm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdnqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w6sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ink26")
+}],
+"loop": true,
+"name": &"runNoGun",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vti64"]
+size = Vector2(29, 40.5)
+
+[node name="personaje" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_n1ehy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_rirxc")
+animation = &"defaultNoGun"
+frame_progress = 0.87963665
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 8)
+shape = SubResource("RectangleShape2D_vti64")
