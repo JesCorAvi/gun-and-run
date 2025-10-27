@@ -1,8 +1,14 @@
-[gd_scene load_steps=32 format=3 uid="uid://c2vqth7v7dss"]
+[gd_scene load_steps=38 format=3 uid="uid://c2vqth7v7dss"]
 
 [ext_resource type="Texture2D" uid="uid://ktugjsolqvpq" path="res://assets/Cowboy 4 HiRes/Cowboy4.png" id="1_2kcgv"]
-[ext_resource type="Script" uid="uid://cmuo858cu2r13" path="res://scripts/personaje.gd" id="1_n1ehy"]
+[ext_resource type="Script" uid="uid://d3t0ffqq8i7il" path="res://scripts/Player.gd" id="1_rdnqt"]
 [ext_resource type="Texture2D" uid="uid://bbdger87ibulg" path="res://assets/Cowboy 4 HiRes/Cowboy4_jumo with gun_0.png" id="3_xvalt"]
+[ext_resource type="Script" uid="uid://buulma3b0g5gt" path="res://scripts/state_machine/StateMachine.gd" id="4_4w6sy"]
+[ext_resource type="Script" uid="uid://ktfd4n8rujmy" path="res://scripts/state_machine/IdleState.gd" id="5_ink26"]
+[ext_resource type="Script" uid="uid://dxehye5kwxo07" path="res://scripts/state_machine/RunState.gd" id="6_rirxc"]
+[ext_resource type="Script" uid="uid://d2gf5n51gbeh1" path="res://scripts/state_machine/JumpState.gd" id="7_vti64"]
+[ext_resource type="Script" uid="uid://cnoktuprgcl2t" path="res://scripts/state_machine/FallState.gd" id="8_ho3dl"]
+[ext_resource type="Script" uid="uid://c827o2x4h0h7m" path="res://scripts/state_machine/WeaponEquippedState.gd" id="9_4w6sy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rirxc"]
 atlas = ExtResource("1_2kcgv")
@@ -224,24 +230,43 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cn6t8")
 }],
-"loop": true,
+"loop": false,
 "name": &"shoot",
-"speed": 5.0
+"speed": 13.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vti64"]
-size = Vector2(29, 40.5)
+size = Vector2(27, 40.5)
 
 [node name="personaje" type="CharacterBody2D"]
 z_index = 5
-script = ExtResource("1_n1ehy")
+script = ExtResource("1_rdnqt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_rirxc")
-animation = &"jumpShoot"
-frame_progress = 0.9421447
+animation = &"shoot"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-10, 8)
+position = Vector2(0.5, 8)
 shape = SubResource("RectangleShape2D_vti64")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_4w6sy")
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("5_ink26")
+
+[node name="RunState" type="Node" parent="StateMachine"]
+script = ExtResource("6_rirxc")
+
+[node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource("7_vti64")
+
+[node name="FallState" type="Node" parent="StateMachine"]
+script = ExtResource("8_ho3dl")
+
+[node name="WeaponEquippedState" type="Node" parent="StateMachine"]
+script = ExtResource("9_4w6sy")
