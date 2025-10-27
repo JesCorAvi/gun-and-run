@@ -241,6 +241,7 @@ size = Vector2(27, 40.5)
 [node name="personaje" type="CharacterBody2D"]
 z_index = 5
 script = ExtResource("1_rdnqt")
+bullets = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

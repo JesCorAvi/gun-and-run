@@ -1,6 +1,7 @@
 extends PlayerState
 
 var is_shooting := false
+var can_shoot := true
 
 func enter(_prev, _data := {}) -> void:
 	player.animated_sprite.play("default")
@@ -25,10 +26,13 @@ func physics_update(delta: float) -> void:
 	player.move_and_slide()
 
 	# Disparo
-	if Input.is_action_just_pressed("shoot") and not is_shooting:
+	if Input.is_action_just_pressed("shoot") and not is_shooting and can_shoot:
 		is_shooting = true
 		player.animated_sprite.play("shoot")
 		player.shoot()
+		player.bullets -= 1
+		if player.bullets == 0:
+			can_shoot = false
 
 	# Saltar
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
