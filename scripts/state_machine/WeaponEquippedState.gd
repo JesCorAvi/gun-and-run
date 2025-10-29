@@ -22,7 +22,7 @@ func physics_update(delta: float) -> void:
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.speed)
 
-	player.velocity.y += player.get_custom_gravity().y * delta
+	player.velocity.y += player.get_gravity().y * delta
 	player.move_and_slide()
 
 	# Disparo
@@ -37,7 +37,9 @@ func physics_update(delta: float) -> void:
 	# Saltar
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		player.velocity.y = player.jump_velocity
+		is_shooting = false 
 		player.animated_sprite.play("jump")
+
 
 	# Quitar arma
 	if Input.is_action_just_pressed("equip_weapon"):

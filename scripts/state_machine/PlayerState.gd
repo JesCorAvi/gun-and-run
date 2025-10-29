@@ -5,6 +5,7 @@ const IDLE = "IdleState"
 const RUNNING = "RunState"
 const JUMPING = "JumpState"
 const FALLING = "FallState"
+const WEAPONED = "WeaponEquippedState"
 
 var player: Player
 

@@ -12,7 +12,7 @@ func physics_update(delta: float) -> void:
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.speed)
 
-	player.velocity.y += player.get_custom_gravity().y * delta
+	player.velocity.y += player.get_gravity().y * delta
 	player.move_and_slide()
 
 	if not player.is_on_floor():
@@ -22,6 +22,4 @@ func physics_update(delta: float) -> void:
 	elif direction == 0:
 		finished.emit(IDLE)
 	elif Input.is_action_just_pressed("equip_weapon"):
-		finished.emit("WeaponEquippedState")
-	if Input.is_action_just_pressed("shoot"):
-		player.shoot()
+		finished.emit(WEAPONED)

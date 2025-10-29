@@ -1,14 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqjc72esjusbr"]
+[gd_scene load_steps=5 format=3 uid="uid://dqjc72esjusbr"]
 
-[ext_resource type="Texture2D" uid="uid://com7vr1p5nr7n" path="res://assets/M484BulletCollection2.png" id="1_mkf8s"]
+[ext_resource type="Script" uid="uid://bwb0o6vfxg1fj" path="res://scripts/bullet.gd" id="1_y25gk"]
+[ext_resource type="Texture2D" uid="uid://drdsni0f3jee5" path="res://assets/25bbfccd-0b91-4908-9209-63fb5de83a68.png" id="2_y25gk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y25gk"]
-atlas = ExtResource("1_mkf8s")
-region = Rect2(453.76776, 114.44519, 17.242645, 9.661835)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5glv"]
+atlas = ExtResource("2_y25gk")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5glv"]
+size = Vector2(47, 20)
 
 [node name="Bullet" type="Area2D"]
+script = ExtResource("1_y25gk")
+SPEED = 550
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_y25gk")
+position = Vector2(9, 8.999998)
+scale = Vector2(0.032226525, 0.031249939)
+texture = SubResource("AtlasTexture_l5glv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 9)
+shape = SubResource("RectangleShape2D_l5glv")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
